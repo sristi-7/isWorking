@@ -2,15 +2,16 @@ var wall,thickness;
 var bullet,speed,weight;
 function setup() {
   createCanvas(1600,600);
+  wall=createSprite(1200,200,thickness,height/2);
+  wall.shapeColor="blue";
   bullet=createSprite(150, 70, 20,10);
   bullet.shapeColor= color ("yellow");
   
-  wall=createSprite(1200,200,thickness,height/2);
-  wall.shapeColor="blue";
-  wallthickness=random(22,83);
-  bulletspeed=random(223,321);
-  bulletweight=random(30,52);
-  bullet.velocityX = 5;
+  
+  thickness=random(22,83);
+  speed=random(223,321);
+  weight=random(30,52);
+  bullet.velocityX = speed;
 }
 
 function draw() {
@@ -20,15 +21,15 @@ function draw() {
   {
     bullet.velocityX=0;
     var damage=(0.5*weight*speed*speed)/(thickness*thickness*thickness);
-    if(wall.damage>=10)
+    if(damage>=10)
     {
-      bullet.shapeColor=color("red");
-      wall.shapeColor = color("red")
+      bullet.shapeColor=color(9, 247, 239);
+      wall.shapeColor = color(97, 234, 18)
     }
-   if (wall.damage<10)
+   if (damage<10)
    {
-     bullet.shapeColor=color("black");
-     wall.shapeColor = color("red")
+     bullet.shapeColor=color(211, 30, 232);
+     wall.shapeColor = color(242, 219, 16)
    }
   }
   //wall.isStatic=true;
@@ -40,22 +41,10 @@ function hasCollided(lbullet, lwall)  {
  bulletRightEdge=lbullet.x +lbullet.width;
    wallLeftEdge=lwall.x;
     if (bulletRightEdge>=wallLeftEdge) {
-       return true }
+       return true ;
+      }else{
         return false;
-       }
+      }
+    }
 
 
-/*
-function hasCollided(lbullet,lwall)
-{
-  if(lbullet.x - lwall.x <lbullet.width/2 + lwall.width/2
-  && lwall.x- lbullet.x <lwall.width/2 +lbullet.width/2
-  && lbullet.y - lwall.y <lbullet.height/2 +lwall.height/2
-  &&lwall.y - lbullet.y <lwall.height/2 +lbullet.height/2
-  )
- {
-   return true;
- }
-return false;
-}
-*/
